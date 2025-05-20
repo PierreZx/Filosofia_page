@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog do Grupo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="body">
+
+  <nav class="navbar">
+  <div class="navbar-container">
+    <h1 class="logo">Filosofia</h1>
+    <div class="integrantes">
+      Ana Clara · Maria · Giovanna · Vitória · Hugo
+    </div>
+    <ul class="nav-links">
+      <li><a href="#post-grupo">Post do Grupo</a></li>
+      <li><a href="#post-platao">Post do Platão</a></li>
+      <li><a href="#post-aristoteles">Post do Aristóteles</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <div class="linha-separadora"></div>
+
+  <div class="blog" id="post-grupo">
+    <div class="blog-topo">
+      <button onclick="mostrar('ana')" id="btn-ana">Ana Clara</button>
+      <button onclick="mostrar('maria')" id="btn-maria">Maria</button>
+      <button onclick="mostrar('giovanna')" id="btn-giovanna">Giovanna</button>
+      <button onclick="mostrar('vitoria')" id="btn-vitoria">Vitória</button>
+      <button onclick="mostrar('hugo')" id="btn-hugo">Hugo</button>
+    </div>
+
+    <div class="conteudo">
+      <div class="pessoa ativa" id="ana">
+        <img src="imagens/foto_ana.jpeg" alt="Ana Clara" />
+        <div class="info">
+          <h3>Ana Clara</h3>
+          <p>Ana Clara é a mais companheira, sempre disposta a ajudar e apoiar o grupo.</p>
+        </div>
+      </div>
+
+      <div class="pessoa" id="maria">
+        <img src="imagens/foto_maria.jpeg" alt="Maria" />
+        <div class="info">
+          <h3>Maria</h3>
+          <p>Maria é espontânea e divertida, trazendo leveza aos momentos difíceis.</p>
+        </div>
+      </div>
+
+      <div class="pessoa" id="giovanna">
+        <img src="imagens/foto_giovanna.jpeg" alt="Giovanna" />
+        <div class="info">
+          <h3>Giovanna</h3>
+          <p>Giovanna é calma e paciente, uma presença estável em meio à turbulência.</p>
+        </div>
+      </div>
+
+      <div class="pessoa" id="vitoria">
+        <img src="imagens/foto_vitoria.jpeg" alt="Vitória" />
+        <div class="info">
+          <h3>Vitória</h3>
+          <p>Vitória é conhecida por sua sinceridade, falando sempre o que pensa com honestidade.</p>
+        </div>
+      </div>
+
+      <div class="pessoa" id="hugo">
+        <img src="imagens/foto_hugo.png" alt="Hugo" />
+        <div class="info">
+          <h3>Hugo</h3>
+          <p>Hugo é leal, alguém em quem todos confiam e que nunca abandona os amigos.</p>
+        </div>
+      </div>
+    </div>
+    <span class="botao-curtir" onclick="curtir(this)">❤</span>
+  </div>
+
+  <div class="blog" id="post-platao">
+  <div class="blog-topo">
+    <button class="ativo">Platão</button>
+  </div>
+  <div class="conteudo">
+    <div class="pessoa ativa">
+      <img src="imagens/estatua-de-marmore-de-platao.webp" alt="Imagem de Platão">
+      <div class="info">
+        <h3>Platão</h3>
+        <p>
+          Platão foi um dos filósofos mais influentes da Grécia Antiga e da história da filosofia ocidental. Discípulo de Sócrates e mestre de Aristóteles, ele fundou a Academia de Atenas, considerada a primeira universidade do mundo ocidental. Entre suas ideias mais conhecidas está o mundo das ideias ou formas, onde tudo é eterno e perfeito, em contraste com o mundo sensível e imperfeito em que vivemos.
+        </p>
+      </div>
+    </div>
+  </div>
+  <span class="botao-curtir" onclick="curtir(this)">❤</span>
+</div>
+
+  <script>
+    function mostrar(id) {
+      document.querySelectorAll('.pessoa').forEach(p => p.classList.remove('ativa'));
+      document.querySelectorAll('.blog-topo button').forEach(b => b.classList.remove('ativo'));
+
+      document.getElementById(id).classList.add('ativa');
+      document.getElementById('btn-' + id).classList.add('ativo');
+    }
+
+    function curtir(el) {
+    el.classList.toggle('curtiu');
+  }
+  </script>
+
+</body>
+</html>
