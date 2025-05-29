@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.body {
+body {
   margin: 0;
   background-color: black;
   animation: fadeInSite 1s ease-in-out;
@@ -52,7 +52,7 @@
 }
 
 .integrantes {
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   color: #aaa;
   margin-bottom: 15px;
 }
@@ -70,7 +70,7 @@
   text-decoration: none;
   color: #ccc;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
 }
 
 .nav-links li a:hover {
@@ -120,7 +120,7 @@
   color: #aaa;
   font-weight: 600;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
   font-size: 15px;
 }
 
@@ -144,7 +144,7 @@
   gap: 15px;
   margin-bottom: 25px;
   opacity: 0.4;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease;
 }
 
 .pessoa.ativa {
@@ -171,7 +171,7 @@
   margin: 0;
   color: #ccc;
   line-height: 1.5;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
 }
 
 /* Coração de curtida */
@@ -181,7 +181,7 @@
   right: 15px;
   font-size: 24px;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
   user-select: none;
 }
 
@@ -214,4 +214,334 @@
   .pessoa .info {
     margin-top: 10px;
   }
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 60px;
+  background-color: #111;
+  color: #d1a037;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.active {
+  width: 250px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid #333;
+}
+
+.sidebar-header h3 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.15s;
+}
+
+.sidebar.active .sidebar-header h3 {
+  opacity: 1;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: #d1a037;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  flex-grow: 1;
+}
+
+.sidebar-links li {
+  margin: 10px 0;
+}
+
+.sidebar-links li a {
+  color: #d1a037;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  white-space: nowrap;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: background-color 0.3s ease, opacity 0.3s ease 0.3s, transform 0.3s ease 0.3s;
+}
+
+.sidebar.active .sidebar-links li a {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.3s;
+}
+
+.sidebar-links li a:hover {
+  background-color: #d1a037;
+  color: #111;
+}
+
+.sidebar-links li a i {
+  min-width: 24px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 15px 20px;
+  font-size: 0.85rem;
+  color: #555;
+  border-top: 1px solid #333;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.15s;
+}
+
+.sidebar.active .sidebar-footer {
+  opacity: 1;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 140;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Botão Hamburger estilizado e fixado no topo esquerdo */
+.sidebar-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: transparent;
+  border: none;
+  font-size: 28px;
+  color: #d1a037;
+  cursor: pointer;
+  z-index: 300; /* acima da sidebar */
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 8px rgba(209, 160, 55, 0.6);
+}
+
+.sidebar-toggle:hover {
+  background-color: rgba(209, 160, 55, 0.15);
+}
+
+/* Modal overlay (janela de criação do post) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 500;
+  overflow-y: auto;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Conteúdo do modal - formulario de criação de post */
+.modal-content {
+  background-color: #121212;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(209, 160, 55, 0.6);
+  max-width: 600px;
+  width: 100%;
+  padding: 30px 35px;
+  color: #ddd;
+  text-align: left;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+/* Título do modal */
+.modal-content h2 {
+  color: #d1a037;
+  font-weight: 700;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+/* Formulário dentro do modal */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Campos de input, textarea e select estilizados */
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="password"],
+.modal-content textarea,
+.modal-content select {
+  background-color: #222;
+  border: 1.5px solid #444;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 1rem;
+  color: #eee;
+  font-weight: 500;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="email"]:focus,
+.modal-content input[type="password"]:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+  border-color: #d1a037;
+  box-shadow: 0 0 8px #d1a037;
+  outline: none;
+}
+
+/* Labels */
+.modal-content label {
+  font-weight: 600;
+  color: #d1a037;
+  margin-bottom: 6px;
+  display: block;
+  font-size: 1rem;
+}
+
+/* Textarea height */
+.modal-content textarea {
+  min-height: 120px;
+}
+
+/* Botões do modal */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.modal-buttons button {
+  padding: 14px 36px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.15rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+  color: white;
+  min-width: 140px;
+  font-family: 'Inter', Arial, sans-serif;
+  box-shadow: 0 4px 10px rgba(209, 160, 55, 0.5);
+  user-select: none;
+}
+
+.modal-buttons .btn-confirm {
+  background-color: #d1a037;
+}
+
+.modal-buttons .btn-confirm:hover {
+  background-color: #b3922b;
+}
+
+.modal-buttons .btn-cancel {
+  background-color: #555;
+}
+
+.modal-buttons .btn-cancel:hover {
+  background-color: #444;
+}
+
+/* Pequenas melhorias visuais adicionais */
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: #888;
+  font-weight: 400;
+}
+
+/* Scroll interno se o conteúdo for muito grande */
+.modal-content {
+  max-height: 85vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d1a037 #333;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #d1a037;
+  border-radius: 8px;
+  border: 2px solid #333;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: #d1a037;
+  cursor: pointer;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #b3922b;
 }

@@ -1,113 +1,298 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blog do Grupo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="body">
 
-  <nav class="navbar">
-  <div class="navbar-container">
-    <h1 class="logo">Filosofia</h1>
-    <div class="integrantes">
-      Ana Clara · Maria · Giovanna · Vitória · Hugo
+  <!-- Barra Lateral -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h3>Menu</h3>
+        <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Abrir menu lateral">
+          <i class="fas fa-bars"></i>
+        </button>
     </div>
-    <ul class="nav-links">
-      <li><a href="#post-grupo">Post do Grupo</a></li>
-      <li><a href="#post-platao">Post do Platão</a></li>
-      <li><a href="#post-aristoteles">Post do Aristóteles</a></li>
+    <ul class="sidebar-links">
+      <li><a href="#post-grupo" onclick="toggleSidebar()"><i class="fas fa-users"></i> Grupo</a></li>
+      <li><a href="#" onclick="openPostModal(); toggleSidebar()"><i class="fas fa-plus-circle"></i> Novo Post</a></li>
     </ul>
-  </div>
-</nav>
-
-  <div class="linha-separadora"></div>
-
-  <div class="blog" id="post-grupo">
-    <div class="blog-topo">
-      <button onclick="mostrar('ana')" id="btn-ana">Ana Clara</button>
-      <button onclick="mostrar('maria')" id="btn-maria">Maria</button>
-      <button onclick="mostrar('giovanna')" id="btn-giovanna">Giovanna</button>
-      <button onclick="mostrar('vitoria')" id="btn-vitoria">Vitória</button>
-      <button onclick="mostrar('hugo')" id="btn-hugo">Hugo</button>
-    </div>
-
-    <div class="conteudo">
-      <div class="pessoa ativa" id="ana">
-        <img src="imagens/foto_ana.jpeg" alt="Ana Clara" />
-        <div class="info">
-          <h3>Ana Clara</h3>
-          <p>Ana Clara é a mais companheira, sempre disposta a ajudar e apoiar o grupo.</p>
-        </div>
-      </div>
-
-      <div class="pessoa" id="maria">
-        <img src="imagens/foto_maria.jpeg" alt="Maria" />
-        <div class="info">
-          <h3>Maria</h3>
-          <p>Maria é espontânea e divertida, trazendo leveza aos momentos difíceis.</p>
-        </div>
-      </div>
-
-      <div class="pessoa" id="giovanna">
-        <img src="imagens/foto_giovanna.jpeg" alt="Giovanna" />
-        <div class="info">
-          <h3>Giovanna</h3>
-          <p>Giovanna é calma e paciente, uma presença estável em meio à turbulência.</p>
-        </div>
-      </div>
-
-      <div class="pessoa" id="vitoria">
-        <img src="imagens/foto_vitoria.jpeg" alt="Vitória" />
-        <div class="info">
-          <h3>Vitória</h3>
-          <p>Vitória é conhecida por sua sinceridade, falando sempre o que pensa com honestidade.</p>
-        </div>
-      </div>
-
-      <div class="pessoa" id="hugo">
-        <img src="imagens/foto_hugo.png" alt="Hugo" />
-        <div class="info">
-          <h3>Hugo</h3>
-          <p>Hugo é leal, alguém em quem todos confiam e que nunca abandona os amigos.</p>
-        </div>
-      </div>
-    </div>
-    <span class="botao-curtir" onclick="curtir(this)">❤</span>
-  </div>
-
-  <div class="blog" id="post-platao">
-  <div class="blog-topo">
-    <button class="ativo">Platão</button>
-  </div>
-  <div class="conteudo">
-    <div class="pessoa ativa">
-      <img src="imagens/estatua-de-marmore-de-platao.webp" alt="Imagem de Platão">
-      <div class="info">
-        <h3>Platão</h3>
-        <p>
-          Platão foi um dos filósofos mais influentes da Grécia Antiga e da história da filosofia ocidental. Discípulo de Sócrates e mestre de Aristóteles, ele fundou a Academia de Atenas, considerada a primeira universidade do mundo ocidental. Entre suas ideias mais conhecidas está o mundo das ideias ou formas, onde tudo é eterno e perfeito, em contraste com o mundo sensível e imperfeito em que vivemos.
-        </p>
-      </div>
+    <div class="sidebar-footer">
+      <p>Blog de Filosofia</p>
     </div>
   </div>
-  <span class="botao-curtir" onclick="curtir(this)">❤</span>
+
+  <!-- Overlay da Sidebar -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Conteúdo Principal -->
+  <div class="main-content" id="main-content">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <h1 class="logo">Filosofia</h1>
+        <div class="integrantes">
+          Ana Clara · Maria · Giovanna · Vitória · Hugo
+        </div>
+        <ul class="nav-links">
+          <li><a href="#post-grupo">Post do Grupo</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="linha-separadora"></div>
+
+    <!-- Post do Grupo -->
+    <div class="blog" id="post-grupo">
+      <div class="blog-topo">
+        <button onclick="mostrar('ana')" id="btn-ana">Ana Clara</button>
+        <button onclick="mostrar('maria')" id="btn-maria">Maria</button>
+        <button onclick="mostrar('giovanna')" id="btn-giovanna">Giovanna</button>
+        <button onclick="mostrar('vitoria')" id="btn-vitoria">Vitória</button>
+        <button onclick="mostrar('hugo')" id="btn-hugo">Hugo</button>
+      </div>
+
+      <div class="conteudo">
+        <div class="pessoa ativa" id="ana">
+          <img src="imagens/foto_ana.jpeg" alt="Ana Clara" />
+          <div class="info">
+            <h3>Ana Clara</h3>
+            <p>Ana Clara é a mais companheira, sempre disposta a ajudar e apoiar o grupo.</p>
+          </div>
+        </div>
+
+        <div class="pessoa" id="maria">
+          <img src="imagens/foto_maria.jpeg" alt="Maria" />
+          <div class="info">
+            <h3>Maria</h3>
+            <p>Maria é espontânea e divertida, trazendo leveza aos momentos difíceis.</p>
+          </div>
+        </div>
+
+        <div class="pessoa" id="giovanna">
+          <img src="imagens/foto_giovanna.jpeg" alt="Giovanna" />
+          <div class="info">
+            <h3>Giovanna</h3>
+            <p>Giovanna é calma e paciente, uma presença estável em meio à turbulência.</p>
+          </div>
+        </div>
+
+        <div class="pessoa" id="vitoria">
+          <img src="imagens/foto_vitoria.jpeg" alt="Vitória" />
+          <div class="info">
+            <h3>Vitória</h3>
+            <p>Vitória é conhecida por sua sinceridade, falando sempre o que pensa com honestidade.</p>
+          </div>
+        </div>
+
+        <div class="pessoa" id="hugo">
+          <img src="imagens/foto_hugo.png" alt="Hugo" />
+          <div class="info">
+            <h3>Hugo</h3>
+            <p>Hugo é leal, alguém em quem todos confiam e que nunca abandona os amigos.</p>
+          </div>
+        </div>
+      </div>
+      <span class="botao-curtir" onclick="curtir(this)">❤</span>
+    </div>
+
+    <!-- Container para novos posts -->
+    <div id="novos-posts-container"></div>
+  </div>
+
+<!-- Modal para Novo Post -->
+<div class="modal-overlay" id="post-modal">
+  <div class="modal-content">
+    <div class="modal-header" style="position: relative;">
+      <h3>Criar Novo Post</h3>
+      <button class="close-modal" onclick="closePostModal()" aria-label="Fechar modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="form-novo-post">
+        <div class="form-group">
+          <label for="post-titulo">Título do Post</label>
+          <input type="text" id="post-titulo" placeholder="Nome do Filósofo" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="post-imagem">URL da Imagem</label>
+          <input type="text" id="post-imagem" placeholder="Cole o link da imagem aqui" required>
+          <small>Recomendado: 300x300px ou proporção 1:1</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="post-texto">Conteúdo</label>
+          <textarea id="post-texto" rows="8" placeholder="Escreva sobre o filósofo..." required></textarea>
+        </div>
+        
+        <div class="form-actions modal-buttons">
+          <button type="button" class="btn-cancel" onclick="closePostModal()">Cancelar</button>
+          <button type="submit" class="btn-confirm">Publicar Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
-  <script>
-    function mostrar(id) {
-      document.querySelectorAll('.pessoa').forEach(p => p.classList.remove('ativa'));
-      document.querySelectorAll('.blog-topo button').forEach(b => b.classList.remove('ativo'));
+<script type="module">
+ // Importar funções do Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
 
-      document.getElementById(id).classList.add('ativa');
-      document.getElementById('btn-' + id).classList.add('ativo');
-    }
+console.log("Iniciando Firebase...");
 
-    function curtir(el) {
-    el.classList.toggle('curtiu');
+const firebaseConfig = {
+  apiKey: "AIzaSyCETtqx-gL3DthYwRdcnzHNdgLL-CgB8TU",
+  authDomain: "filosofia-5d273.firebaseapp.com",
+  projectId: "filosofia-5d273",
+  storageBucket: "filosofia-5d273.appspot.com",
+  messagingSenderId: "994283349897",
+  appId: "1:994283349897:web:aace473de0968022df2358",
+  measurementId: "G-37YR9KQHLZ",
+  databaseURL: "https://filosofia-5d273-default-rtdb.firebaseio.com/"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getDatabase(app);
+
+console.log("Firebase inicializado com sucesso.");
+
+// Funções normais do site
+window.mostrar = function(id) {
+  console.log("Mostrando:", id);
+  document.querySelectorAll('.pessoa').forEach(p => p.classList.remove('ativa'));
+  document.querySelectorAll('.blog-topo button').forEach(b => b.classList.remove('ativo'));
+  document.getElementById(id).classList.add('ativa');
+  document.getElementById('btn-' + id).classList.add('ativo');
+}
+
+window.curtir = function(el) {
+  console.log("Curtida clicada");
+  el.classList.toggle('curtiu');
+}
+
+window.toggleSidebar = function() {
+  console.log("Alternando sidebar");
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+  document.body.classList.toggle('sidebar-active');
+}
+
+window.openPostModal = function() {
+  console.log("Abrindo modal");
+  const modal = document.getElementById('post-modal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    document.getElementById('post-titulo').focus();
+  }, 300);
+}
+
+window.closePostModal = function() {
+  console.log("Fechando modal");
+  const modal = document.getElementById('post-modal');
+  modal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+// Carregar posts em tempo real
+const postsRef = ref(db, 'posts');
+const container = document.getElementById('novos-posts-container');
+
+console.log("Tentando ouvir mudanças em 'posts'...");
+onValue(postsRef, (snapshot) => {
+  console.log("onValue disparado para 'posts'");
+  container.innerHTML = ''; // Limpar para recarregar
+  if (!snapshot.exists()) {
+    console.log("Nenhum dado encontrado em 'posts'");
   }
-  </script>
+  snapshot.forEach(child => {
+    const post = child.val();
+    const key = child.key;
+    console.log("Carregando post:", key, post);
+
+    const postHTML = `
+      <div class="blog" id="${key}">
+        <div class="blog-topo">
+          <button class="ativo">${post.title}</button>
+          <button onclick="deletePost('${key}')">🗑️</button>
+        </div>
+        <div class="conteudo">
+          <div class="pessoa ativa">
+            <img src="${post.image}" alt="${post.title}">
+            <div class="info">
+              <h3>${post.title}</h3>
+              <p>${post.content}</p>
+            </div>
+          </div>
+        </div>
+        <span class="botao-curtir" onclick="curtir(this)">❤</span>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', postHTML);
+  });
+}, (error) => {
+  console.error("Erro ao ouvir 'posts':", error);
+});
+
+// Função para excluir post
+window.deletePost = function(key) {
+  console.log("Tentando excluir post:", key);
+  const postRef = ref(db, 'posts/' + key);
+  remove(postRef)
+    .then(() => console.log("Post removido com sucesso"))
+    .catch(err => console.error("Erro ao remover post:", err));
+}
+
+// Enviar novo post
+document.getElementById('form-novo-post').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const title = document.getElementById('post-titulo').value.trim();
+  const image = document.getElementById('post-imagem').value.trim();
+  const content = document.getElementById('post-texto').value.trim();
+
+  if (!title) {
+    alert("Por favor, insira um título.");
+    return;
+  }
+
+  console.log("Enviando novo post:", { title, image, content });
+
+  push(postsRef, { title, image, content })
+    .then(() => {
+      console.log("Post enviado com sucesso.");
+      closePostModal();
+      this.reset();
+    })
+    .catch(err => {
+      console.error("Erro ao salvar:", err);
+    });
+});
+
+// Fechar modal ao clicar fora
+document.getElementById('post-modal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    console.log("Fechando modal por clique fora");
+    closePostModal();
+  }
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    console.log("Fechando modal por tecla ESC");
+    closePostModal();
+  }
+});
+
+</script>
+
 
 </body>
 </html>
