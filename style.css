@@ -37,31 +37,50 @@ body {
 }
 
 .navbar-container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 0 20px;
-  display: flex; /* para alinhar elementos em linha */
-  align-items: center;
-  justify-content: space-between; /* separa o logo do botão/menu */
+  position: relative;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc; /* só pra visualização */
+}
+
+/* Linha superior com botão e título */
+.navbar-container > button.sidebar-toggle {
+  position: absolute;
+  left: 20px;
+  top: 15px; /* ajuste conforme altura do navbar */
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .logo {
-  font-size: 1.8rem;
+  text-align: center;
+  font-size: 2rem; /* seu estilo anterior */
   font-weight: bold;
-  letter-spacing: 2px;
-  color: #d1a037;
   margin: 0;
+  padding: 10px 0;
+  user-select: none;
+  color: #b3922b;
+}
+
+.content-below {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .integrantes {
   font-size: 0.875rem; /* 14px */
   color: #aaa;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .nav-links {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -260,9 +279,9 @@ body {
 .sidebar-toggle {
   background: none;
   border: none;
-  color: #d1a037;
   font-size: 1.5rem;
   cursor: pointer;
+  z-index: 2; /* pra ficar acima do título se necessário */
 }
 
 .sidebar-links {
