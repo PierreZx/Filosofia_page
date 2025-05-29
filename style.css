@@ -40,15 +40,17 @@ body {
   max-width: 1000px;
   margin: auto;
   padding: 0 20px;
-  text-align: center;
+  display: flex; /* para alinhar elementos em linha */
+  align-items: center;
+  justify-content: space-between; /* separa o logo do botão/menu */
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   letter-spacing: 2px;
   color: #d1a037;
-  margin-bottom: 5px;
+  margin: 0;
 }
 
 .integrantes {
@@ -220,20 +222,16 @@ body {
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
-  height: 100vh;
-  width: 60px;
-  background-color: #111;
-  color: #d1a037;
-  transition: width 0.3s ease;
-  overflow-x: hidden;
-  z-index: 150;
-  display: flex;
-  flex-direction: column;
+  left: -250px; /* escondida 100% */
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  transition: left 0.3s ease;
+  z-index: 200;
 }
 
 .sidebar.active {
-  width: 250px;
+  left: 0; /* aparece */
 }
 
 .sidebar-header {
@@ -327,13 +325,13 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease;
-  z-index: 140;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 100;
 }
 
 .sidebar-overlay.active {
@@ -378,10 +376,15 @@ body {
   z-index: 500;
   overflow-y: auto;
   animation: fadeIn 0.4s ease forwards;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .modal-overlay.active {
   display: flex;
+    opacity: 1;
+    visibility: visible;
 }
 
 @keyframes fadeIn {
