@@ -9,7 +9,6 @@
 </head>
 <body class="body">
 
-  <!-- Barra Lateral -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h3>Menu</h3>
@@ -26,19 +25,15 @@
     </div>
   </div>
 
-  <!-- Overlay da Sidebar -->
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-  <!-- Conteúdo Principal -->
   <div class="main-content" id="main-content">
     <nav class="navbar">
       <div class="navbar-container">
         <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Abrir menu lateral">
           <i class="fas fa-bars"></i>
         </button>
-
         <h1 class="logo">Filosofia</h1>
-
         <div class="content-below">
           <div class="integrantes">
             Ana Clara · Maria · Giovanna · Vitória · Hugo
@@ -52,7 +47,6 @@
 
     <div class="linha-separadora"></div>
 
-    <!-- Post do Grupo -->
     <div class="blog" id="post-grupo">
       <div class="blog-topo">
         <button onclick="mostrar('ana')" id="btn-ana">Ana Clara</button>
@@ -61,7 +55,6 @@
         <button onclick="mostrar('vitoria')" id="btn-vitoria">Vitória</button>
         <button onclick="mostrar('hugo')" id="btn-hugo">Hugo</button>
       </div>
-
       <div class="conteudo">
         <div class="pessoa ativa" id="ana">
           <img src="imagens/foto_ana.jpeg" alt="Ana Clara" />
@@ -70,7 +63,6 @@
             <p>Ana Clara é a mais companheira, sempre disposta a ajudar e apoiar o grupo.</p>
           </div>
         </div>
-
         <div class="pessoa" id="maria">
           <img src="imagens/foto_maria.jpeg" alt="Maria" />
           <div class="info">
@@ -78,7 +70,6 @@
             <p>Maria é espontânea e divertida, trazendo leveza aos momentos difíceis.</p>
           </div>
         </div>
-
         <div class="pessoa" id="giovanna">
           <img src="imagens/foto_giovanna.jpeg" alt="Giovanna" />
           <div class="info">
@@ -86,7 +77,6 @@
             <p>Giovanna é calma e paciente, uma presença estável em meio à turbulência.</p>
           </div>
         </div>
-
         <div class="pessoa" id="vitoria">
           <img src="imagens/foto_vitoria.jpeg" alt="Vitória" />
           <div class="info">
@@ -94,7 +84,6 @@
             <p>Vitória é conhecida por sua sinceridade, falando sempre o que pensa com honestidade.</p>
           </div>
         </div>
-
         <div class="pessoa" id="hugo">
           <img src="imagens/foto_hugo.png" alt="Hugo" />
           <div class="info">
@@ -106,11 +95,9 @@
       <span class="botao-curtir" onclick="curtir(this)">❤</span>
     </div>
 
-    <!-- Container para novos posts -->
     <div id="novos-posts-container"></div>
   </div>
 
-<!-- Modal para Novo Post -->
 <div class="modal-overlay" id="post-modal">
   <div class="modal-content">
     <div class="modal-header" style="position: relative;">
@@ -144,10 +131,43 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal-content">
+    <div class="modal-header" style="position: relative;">
+      <h3>Editar Post</h3>
+      <button class="close-modal" onclick="closeEditModal()" aria-label="Fechar modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="form-edit-post">
+        <input type="hidden" id="edit-post-key"> <div class="form-group">
+          <label for="edit-post-titulo">Título do Post</label>
+          <input type="text" id="edit-post-titulo" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-post-imagem">URL da Imagem</label>
+          <input type="text" id="edit-post-imagem" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-post-texto">Conteúdo</label>
+          <textarea id="edit-post-texto" rows="8" required></textarea>
+        </div>
+        
+        <div class="form-actions modal-buttons">
+          <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancelar</button>
+          <button type="submit" class="btn-confirm">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 <script type="module">
- // Importar funções do Firebase
+// Importar funções do Firebase (Simplificado)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
 
 console.log("Iniciando Firebase...");
@@ -171,7 +191,6 @@ console.log("Firebase inicializado com sucesso.");
 
 // Funções normais do site
 window.mostrar = function(id) {
-  console.log("Mostrando:", id);
   document.querySelectorAll('.pessoa').forEach(p => p.classList.remove('ativa'));
   document.querySelectorAll('.blog-topo button').forEach(b => b.classList.remove('ativo'));
   document.getElementById(id).classList.add('ativa');
@@ -179,12 +198,10 @@ window.mostrar = function(id) {
 }
 
 window.curtir = function(el) {
-  console.log("Curtida clicada");
   el.classList.toggle('curtiu');
 }
 
 window.toggleSidebar = function() {
-  console.log("Alternando sidebar");
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebar-overlay');
   sidebar.classList.toggle('active');
@@ -193,7 +210,6 @@ window.toggleSidebar = function() {
 }
 
 window.openPostModal = function() {
-  console.log("Abrindo modal");
   const modal = document.getElementById('post-modal');
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -203,40 +219,69 @@ window.openPostModal = function() {
 }
 
 window.closePostModal = function() {
-  console.log("Fechando modal");
   const modal = document.getElementById('post-modal');
   modal.classList.remove('active');
   document.body.style.overflow = 'auto';
 }
 
-// Carregar posts em tempo real
+// Funções para o Modal de Edição (NOVAS)
+let allPosts = {}; // Guarda os dados dos posts para fácil acesso na edição
+
+window.openEditModal = function(key) {
+    const post = allPosts[key];
+    if (!post) {
+        console.error("Post não encontrado para edição:", key);
+        return;
+    }
+    // Preenche o formulário de edição com os dados do post
+    document.getElementById('edit-post-key').value = key;
+    document.getElementById('edit-post-titulo').value = post.title;
+    document.getElementById('edit-post-imagem').value = post.image;
+    document.getElementById('edit-post-texto').value = post.content;
+
+    const modal = document.getElementById('edit-modal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+window.closeEditModal = function() {
+    const modal = document.getElementById('edit-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Carregar posts em tempo real (MODIFICADO para incluir botão de Editar)
 const postsRef = ref(db, 'posts');
 const container = document.getElementById('novos-posts-container');
 
-console.log("Tentando ouvir mudanças em 'posts'...");
 onValue(postsRef, (snapshot) => {
-  console.log("onValue disparado para 'posts'");
-  container.innerHTML = ''; // Limpar para recarregar
+  container.innerHTML = ''; 
+  allPosts = {}; // Limpa e recarrega os posts locais
+
   if (!snapshot.exists()) {
-    console.log("Nenhum dado encontrado em 'posts'");
+    console.log("Nenhum post encontrado.");
   }
   snapshot.forEach(child => {
     const post = child.val();
     const key = child.key;
-    console.log("Carregando post:", key, post);
+    allPosts[key] = post; // Armazena o post para a função de edição
 
+    // Adiciona o botão de editar (✏️) ao lado do de excluir (🗑️)
     const postHTML = `
       <div class="blog" id="${key}">
         <div class="blog-topo">
           <button class="ativo">${post.title}</button>
-          <button onclick="deletePost('${key}')">🗑️</button>
+          <div>
+            <button onclick="openEditModal('${key}')">✏️</button>
+            <button onclick="deletePost('${key}')">🗑️</button>
+          </div>
         </div>
         <div class="conteudo">
           <div class="pessoa ativa">
             <img src="${post.image}" alt="${post.title}">
             <div class="info">
               <h3>${post.title}</h3>
-              <p>${post.content}</p>
+              <p>${post.content.replace(/\n/g, '<br>')}</p>
             </div>
           </div>
         </div>
@@ -246,31 +291,30 @@ onValue(postsRef, (snapshot) => {
     container.insertAdjacentHTML('beforeend', postHTML);
   });
 }, (error) => {
-  console.error("Erro ao ouvir 'posts':", error);
+  console.error("Erro ao carregar posts:", error);
 });
 
 // Função para excluir post
 window.deletePost = function(key) {
-  console.log("Tentando excluir post:", key);
+  if (!confirm("Tem certeza que deseja excluir este post?")) return;
+  
   const postRef = ref(db, 'posts/' + key);
   remove(postRef)
     .then(() => console.log("Post removido com sucesso"))
     .catch(err => console.error("Erro ao remover post:", err));
 }
 
-// Enviar novo post
+// Enviar novo post (Lógica original, simplificada)
 document.getElementById('form-novo-post').addEventListener('submit', function(e) {
   e.preventDefault();
   const title = document.getElementById('post-titulo').value.trim();
   const image = document.getElementById('post-imagem').value.trim();
   const content = document.getElementById('post-texto').value.trim();
 
-  if (!title) {
-    alert("Por favor, insira um título.");
+  if (!title || !image || !content) {
+    alert("Por favor, preencha todos os campos.");
     return;
   }
-
-  console.log("Enviando novo post:", { title, image, content });
 
   push(postsRef, { title, image, content })
     .then(() => {
@@ -280,26 +324,51 @@ document.getElementById('form-novo-post').addEventListener('submit', function(e)
     })
     .catch(err => {
       console.error("Erro ao salvar:", err);
+      alert("Ocorreu um erro ao publicar o post.");
     });
 });
 
-// Fechar modal ao clicar fora
-document.getElementById('post-modal').addEventListener('click', function(e) {
-  if (e.target === this) {
-    console.log("Fechando modal por clique fora");
-    closePostModal();
-  }
+// Salvar post editado (NOVA FUNÇÃO)
+document.getElementById('form-edit-post').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const key = document.getElementById('edit-post-key').value;
+    const title = document.getElementById('edit-post-titulo').value.trim();
+    const image = document.getElementById('edit-post-imagem').value.trim();
+    const content = document.getElementById('edit-post-texto').value.trim();
+
+    const postData = { title, image, content };
+    const postToUpdateRef = ref(db, 'posts/' + key);
+
+    update(postToUpdateRef, postData)
+        .then(() => {
+            console.log("Post atualizado com sucesso");
+            closeEditModal();
+        })
+        .catch(err => {
+            console.error("Erro ao atualizar post:", err);
+            alert("Erro ao salvar as alterações.");
+        });
+});
+
+
+// Fechar modais ao clicar fora ou com a tecla ESC
+['post-modal', 'edit-modal'].forEach(modalId => {
+  document.getElementById(modalId).addEventListener('click', function(e) {
+    if (e.target === this) {
+      window.closePostModal();
+      window.closeEditModal();
+    }
+  });
 });
 
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    console.log("Fechando modal por tecla ESC");
-    closePostModal();
+    window.closePostModal();
+    window.closeEditModal();
   }
 });
 
 </script>
-
 
 </body>
 </html>
